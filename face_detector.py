@@ -4,20 +4,31 @@ import cv2
 trained_face_data = cv2.CascadeClassifier(r'C:\Users\andyt\Desktop\source\projects\face-detector\haarcascade_frontalface_default.xml')
 
 # CHOOSE AN IMG, CONVERT TO GREYSCALE
-img = cv2.imread(r'C:/Users/andyt/Desktop/source/projects/face-detector/face1.png')
-grayscale_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# img = cv2.imread(r'C:/Users/andyt/Desktop/source/projects/face-detector/face1.png')
+# grayscale_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+# SET WEBCAM VARIABLE
+webcam = cv2.VideoCapture(0)
+
+while True:
+
+    # READ CURRENT FRAME AND CONVERT TO GRAYSCALE
+    successful_frame_read, frame = webcam.read()
+    grayscale_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    cv2.imshow('Face Detector', frame)
+    cv2.waitKey(1)
+"""
 # FACE DETECTION, GENERATE COORDS 
-face_coordinates = trained_face_data.detectMultiScale(grayscale_img)
+face_coordinates = trained_face_data.detectMultiScale(grayscale_frame)
 
 # DRAW RECT ON ORIGINAL IMG
-# (x, y, w, h) = face_coordinates[0]  <-- for single face
+# (x, y, w, h) = face_coordinates[0]  <-- for one face
 for (x, y, w, h) in face_coordinates:
-    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
+    cv2.rectangle(webcam, (x, y), (x+w, y+h), (0, 255, 0), 2)
+"""
 
 # DISPLAY IMG 
-cv2.imshow('Face Detector', img)
-cv2.waitKey()
+
 
 
 print("Code Complete")
