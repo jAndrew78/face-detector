@@ -19,14 +19,17 @@ while True:
     # FACE DETECTION, GENERATE COORDS 
     face_coordinates = trained_face_data.detectMultiScale(grayscale_frame)
 
-    # DRAW RECT ON ORIGINAL IMG
+    # DRAW RECT ON ORIGINAL FRAME (NOT THE GREY ONE)
     # (x, y, w, h) = face_coordinates[0]  <-- for one face
     for (x, y, w, h) in face_coordinates:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
     # DISPLAY VIDEO 
     cv2.imshow('Face Detector', frame)
-    cv2.waitKey(1)
+    key = cv2.waitKey(1)
 
+    if key==81 or key==113 or key==27:
+        break
 
+webcam.release()
 print("Code Complete")
